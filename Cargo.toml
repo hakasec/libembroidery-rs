@@ -1,0 +1,10 @@
+[package]
+name = "libembroidery"
+version = "0.1.0"
+authors = ["Declan Soper <soperdeclan@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+libembroidery-sys = { path = "/home/declan/Documents/libembroidery-sys" }
+shh = "1.0.0"
+
