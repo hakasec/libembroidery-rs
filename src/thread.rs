@@ -41,14 +41,6 @@ impl From<*mut ffi::EmbThreadList> for EmbThreadList {
     }
 }
 
-//impl Index<i32> for EmbThreadList {
-//    type Output = ffi::EmbThread;
-//
-//    fn index(&self, index: i32) -> &Self::Output {
-//        self.get_at(index)
-//    }
-//}
-
 impl IntoIterator for EmbThreadList {
     type Item = EmbThread;
     type IntoIter = IntoIter;
@@ -107,15 +99,6 @@ impl EmbThread {
 }
 
 impl EmbThreadList {
-    pub fn new(data: ffi::EmbThread) -> EmbThreadList {
-        unsafe {
-            let start = ffi::embThreadList_create(data);
-            EmbThreadList {
-                start,
-            }
-        }
-    }
-
     pub fn len(&self) -> i32 {
         unsafe {
             ffi::embThreadList_count(self.start)

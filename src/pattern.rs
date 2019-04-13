@@ -1,6 +1,7 @@
 use std::ffi::CString;
 
 use crate::thread::EmbThreadList;
+use crate::stitch::EmbStitchList;
 
 pub struct EmbPattern {
     inner: *mut ffi::EmbPattern,
@@ -42,6 +43,18 @@ impl EmbPattern {
     pub fn thread(&self) -> EmbThreadList {
         unsafe {
             EmbThreadList::from((*self.inner).threadList)
+        }
+    }
+
+    pub fn scale(&self, scale: f64) {
+        unsafe {
+            ffi::embPattern_scale(self.inner, scale);
+        }
+    }
+
+    pub fn stitches(&self) -> EmbStitchList {
+        unsafe {
+            EmbStitchList::from((*self.inner).stitchList)
         }
     }
 
@@ -87,5 +100,8 @@ mod tests {
 
         assert_eq!(p.thread().len(), 1);
         assert_eq!(p.thread().get_at(0).description(), "Black");
+
+        assert_eq!(p.stitches().len(), 5322);
+        assert_eq!(p.stitches().get_at(0).flags(), 1);
     }
 }

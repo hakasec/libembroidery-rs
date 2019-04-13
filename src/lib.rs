@@ -4,6 +4,7 @@ mod pattern;
 mod helpers;
 mod colour;
 mod thread;
+mod stitch;
 // mod error;
 
 pub use pattern::EmbPattern;
